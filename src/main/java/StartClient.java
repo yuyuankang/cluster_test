@@ -15,7 +15,7 @@ public class StartClient {
     for (int i = 0; i < Config.CLIENT_NUMBER; i++) {
       String path = Config.BASE + File.separator + Config.ORIGIN_DIR + File.separator + Config.START_CLIENT_BAT;
       pool.submit(() -> {
-        ExecuteUtils.executeBatchFile(path, logger);
+        ExecuteUtils.executeBatchFile(path, logger, "-h", "127.0.0.1", "-p", "55560", "-u", "root", "-pw", "root");
       });
     }
     pool.shutdown();
