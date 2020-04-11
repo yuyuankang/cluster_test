@@ -14,9 +14,7 @@ public class StartCluster {
     ExecutorService pool = new ScheduledThreadPoolExecutor(Config.SEED_NUMBER);
     for (int i = 0; i < Config.SEED_NUMBER; i++) {
       String path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator + Config.START_CLUSTER_BAT;
-      pool.submit(() -> {
-        ExecuteUtils.executeBatchFile(path, logger);
-      });
+      pool.submit(() -> ExecuteUtils.executeBatchFile(path, logger));
     }
     pool.shutdown();
     pool.awaitTermination(5, TimeUnit.MINUTES);
