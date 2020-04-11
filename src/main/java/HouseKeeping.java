@@ -36,7 +36,7 @@ public class HouseKeeping {
           FileUtils.copyDirectory(new File(Config.BASE + File.separator + Config.ORIGIN_DIR), file);
           logger.info("Finish copying {}.", file.getAbsoluteFile());
         } catch (IOException e) {
-          e.printStackTrace();
+          logger.error("IOException", e);
         }
       });
     }
@@ -120,9 +120,10 @@ public class HouseKeeping {
           cleanTempFiles(tempBatchFilePath);
           logger.info(Config.FINISH_COMPILATION_MESSAGE, compileLocation);
         } catch (IOException e) {
-          e.printStackTrace();
+          logger.error("TOException", e);
         } catch (InterruptedException e) {
-          e.printStackTrace();
+          logger.error("Interrupted", e);
+          Thread.currentThread().interrupt();
         }
       });
     }
@@ -159,6 +160,4 @@ public class HouseKeeping {
     modifyConfig();
     compile();
   }
-
-
 }

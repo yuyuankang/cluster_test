@@ -11,11 +11,11 @@ class ExecuteUtils {
   static void executeBatchFile(String path, Logger logger) {
     logger.info("Start executing batch file: {}.", path);
     if (new File(path).exists()) {
+      String command = "cmd /c start \"\" " + path;
       try {
-        String command = "cmd /c start \"\" " + path;
         Runtime.getRuntime().exec(command);
       } catch (IOException e) {
-        e.printStackTrace();
+        logger.error("Error occurs when executing the command {}. ", command, e);
       }
     } else {
       logger.error("Batch file is not found: {}", path);
@@ -25,11 +25,11 @@ class ExecuteUtils {
   static void executeBatchFile(String path, Logger logger, String... args) {
     logger.info("Start executing batch file: {}.", path);
     if (new File(path).exists()) {
+      String command = "cmd /c start \"\" " + path + " " + String.join(" ", args);
       try {
-        String command = "cmd /c start \"\" " + path + " " + String.join(" ", args);
         Runtime.getRuntime().exec(command);
       } catch (IOException e) {
-        e.printStackTrace();
+        logger.error("Error occurs when executing the command {}. ", command, e);
       }
     } else {
       logger.error("Batch file is not found: {}", path);
