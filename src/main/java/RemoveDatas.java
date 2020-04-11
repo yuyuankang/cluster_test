@@ -7,12 +7,13 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class RemoveDatas {
 
   private static final Logger logger = LoggerFactory.getLogger(HouseKeeping.class);
 
-  public static void main(String args[]) {
+  public static void main(String args[]) throws InterruptedException {
 
     ExecutorService pool = new ScheduledThreadPoolExecutor(Config.SEED_NUMBER);
     for (int i = 0; i < Config.SEED_NUMBER; i++) {
@@ -28,5 +29,9 @@ public class RemoveDatas {
         }
       });
     }
+    pool.shutdown();
+    pool.awaitTermination(5, TimeUnit.MINUTES);
+    logger.info("Finish removing all data.");
   }
+
 }
