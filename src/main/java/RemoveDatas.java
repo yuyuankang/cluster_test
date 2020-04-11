@@ -17,7 +17,8 @@ public class RemoveDatas {
 
     ExecutorService pool = new ScheduledThreadPoolExecutor(Config.SEED_NUMBER);
     for (int i = 0; i < Config.SEED_NUMBER; i++) {
-      String path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator + "\\cluster\\target\\cluster-0.10.0-SNAPSHOT\\data";
+      String path = Config.BASE + File.separator
+              + Config.ORIGIN_DIR + i + File.separator + Config.DATA_DIR;
       pool.submit(() -> {
         File f = new File(path);
         if (f.exists()) {

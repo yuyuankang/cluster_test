@@ -38,4 +38,6 @@ class Config {
   static final String FINISH_COMPILATION_MESSAGE = "Finish compilation in {} ";
   static final String START_MODIFYING_MESSAGE = "Start modifying configuration in file {}.";
   static final String FINISH_MODIFYING_MESSAGE = "Finish modifying configuration in file {}.";
+
+  static final String DATA_DIR = "cluster\\target\\cluster-0.10.0-SNAPSHOT\\data";
 }
