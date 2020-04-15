@@ -12,9 +12,8 @@ public class StartCluster {
 
   public static void main(String args[]) throws InterruptedException {
     ExecutorService pool = new ScheduledThreadPoolExecutor(Config.SEED_NUMBER);
-    int number = 1;
 //    for (int i = 0; i < Config.SEED_NUMBER; i++) {
-    for (int i = Config.SEED_NUMBER - 1; i >= number; i--) {
+    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
       String path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator + Config.START_CLUSTER_BAT;
       pool.submit(() -> ExecuteUtils.executeBatchFile(path, logger));
     }

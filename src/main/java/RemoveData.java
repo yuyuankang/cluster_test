@@ -1,9 +1,12 @@
+import java.nio.file.Path;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -26,17 +29,51 @@ public class RemoveData {
     }
   }
 
-  public static void main(String args[]) throws InterruptedException {
+  public static void main(String args[]) throws InterruptedException, IOException {
 
     ExecutorService pool = new ScheduledThreadPoolExecutor(Config.SEED_NUMBER);
 
     String originalPath = Config.BASE + File.separator
-            + Config.ORIGIN_DIR + File.separator + Config.DATA_DIR;
+        + Config.ORIGIN_DIR + File.separator + Config.DATA_DIR;
     pool.submit(() -> deleteDir(originalPath));
 
+    Path nodeIdPath = Paths.get(Config.NODE_ID);
+    if (nodeIdPath.toFile().exists()) {
+      Files.delete(nodeIdPath);
+    }
+    Path partitionIdPath = Paths.get(Config.PARTITIONS);
+    if (nodeIdPath.toFile().exists()) {
+      Files.delete(partitionIdPath);
+    }
+
+    String originalPartitionPath = Config.BASE + File.separator
+        + Config.ORIGIN_DIR + File.separator + "partitions";
+    String originalIdentifier = Config.BASE + File.separator
+        + Config.ORIGIN_DIR + File.separator + "node_identifier";
+
+    if (Paths.get(originalPartitionPath).toFile().exists()) {
+      Files.delete(Paths.get(originalPartitionPath));
+    }
+    if (Paths.get(originalIdentifier).toFile().exists()) {
+      Files.delete(Paths.get(originalIdentifier));
+    }
+
+//    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
     for (int i = 0; i < Config.SEED_NUMBER; i++) {
       String path = Config.BASE + File.separator
-              + Config.ORIGIN_DIR + i + File.separator + Config.DATA_DIR;
+          + Config.ORIGIN_DIR + i + File.separator + Config.DATA_DIR;
+      String partitionPath = Config.BASE + File.separator
+          + Config.ORIGIN_DIR + i + File.separator + Config.SBIN + File.separator + "partitions";
+      String identifier = Config.BASE + File.separator
+          + Config.ORIGIN_DIR + i + File.separator + Config.SBIN + File.separator
+          + "node_identifier";
+
+      if (Paths.get(partitionPath).toFile().exists()) {
+        Files.delete(Paths.get(partitionPath));
+      }
+      if (Paths.get(identifier).toFile().exists()) {
+        Files.delete(Paths.get(identifier));
+      }
       pool.submit(() -> deleteDir(path));
     }
     pool.shutdown();
