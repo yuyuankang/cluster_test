@@ -10,6 +10,7 @@ class Config {
 
   static final int SEED_NUMBER = 3;
   static final int CLIENT_NUMBER = 1;
+  static final int REPLICATION_NUM = 2;
   static final String ORIGIN_DIR = "incubator-iotdb";
 
   // The following configurations should be modified, cluster/iotdb-cluster.properties, cluster/iotdb-engine.properties, cluster/cluster-env.bat, server/iotdb-engine.properties
@@ -46,4 +47,10 @@ class Config {
 
   static final String NODE_ID = "node_identifier";
   static final String PARTITIONS = "partitions";
+
+  static final String QUERY_FILE = "queries.txt";
+
+  static final String REPLICATION_MATCHER = "REPLICA_NUM=3";
+  static final String NEW_REPLICATION_TEXT = String
+      .join("=", REPLICATION_MATCHER.split("=")[0], String.valueOf(REPLICATION_NUM));
 }

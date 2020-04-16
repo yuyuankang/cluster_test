@@ -59,27 +59,35 @@ public class HouseKeeping {
       throw new IOException("File is not found " + path.toAbsolutePath());
     }
     Stream<String> lines = Files.lines(path);
-    List<String> replaced = lines.map(line -> line.replaceAll(oldText, newText)).collect(Collectors.toList());
+    List<String> replaced = lines.map(line -> line.replaceAll(oldText, newText))
+        .collect(Collectors.toList());
     Files.write(path, replaced);
     lines.close();
   }
 
+
   private static void modifyConfig() throws IOException {
+
+    String firstPath = Config.BASE + File.separator + Config.ORIGIN_DIR + 0 + File.separator
+        + Config.CLUSTER_BASE + File.separator + Config.IOTDB_CLUSTER;
+    modifyFile(Paths.get(firstPath), Config.REPLICATION_MATCHER, Config.NEW_REPLICATION_TEXT);
+
 //    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
     for (int i = 1; i < Config.SEED_NUMBER; i++) {
       String path;
       // modify cluster/iotdb-cluster.properties
       path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator
-              + Config.CLUSTER_BASE + File.separator + Config.IOTDB_CLUSTER;
+          + Config.CLUSTER_BASE + File.separator + Config.IOTDB_CLUSTER;
       logger.info(Config.START_MODIFYING_MESSAGE, path);
       for (String text : Config.replacedInClusterIotdbCluster) {
         modifyFile(Paths.get(path), text, generateNewText(i, text));
       }
+      modifyFile(Paths.get(path), Config.REPLICATION_MATCHER, Config.NEW_REPLICATION_TEXT);
       logger.info(Config.FINISH_MODIFYING_MESSAGE, path);
 
       // modify cluster/iotdb-engine.properties
       path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator
-              + Config.CLUSTER_BASE + File.separator + Config.IOTDB_ENGINE;
+          + Config.CLUSTER_BASE + File.separator + Config.IOTDB_ENGINE;
       logger.info(Config.START_MODIFYING_MESSAGE, path);
       for (String text : Config.replacedInClusterIotdbEngine) {
         modifyFile(Paths.get(path), text, generateNewText(i, text));
@@ -88,7 +96,7 @@ public class HouseKeeping {
 
       // modify cluster/cluster-env.bat
       path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator
-              + Config.CLUSTER_BASE + File.separator + Config.CLUSTER_ENV;
+          + Config.CLUSTER_BASE + File.separator + Config.CLUSTER_ENV;
       logger.info(Config.START_MODIFYING_MESSAGE, path);
       for (String text : Config.replacedInClusterClusterEnv) {
         modifyFile(Paths.get(path), text, generateNewText(i, text));
@@ -97,7 +105,7 @@ public class HouseKeeping {
 
       // modify server/iotdb-engine.properties
       path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator
-              + Config.SERVER_BASE + File.separator + Config.IOTDB_ENGINE;
+          + Config.SERVER_BASE + File.separator + Config.IOTDB_ENGINE;
       logger.info(Config.START_MODIFYING_MESSAGE, path);
       for (String text : Config.replacedInServerIotdbEngine) {
         modifyFile(Paths.get(path), text, generateNewText(i, text));
@@ -139,7 +147,8 @@ public class HouseKeeping {
     Files.delete(Paths.get(filePath));
   }
 
-  private static void generateBatchFile(String compileLocation, String fileName) throws IOException {
+  private static void generateBatchFile(String compileLocation, String fileName)
+      throws IOException {
     Path tempBatchPath = Paths.get(fileName);
     if (tempBatchPath.toFile().exists()) {
       Files.delete(tempBatchPath);
@@ -147,9 +156,9 @@ public class HouseKeeping {
     Files.createFile(tempBatchPath);
     FileWriter writer = new FileWriter(tempBatchPath.toFile(), true);
     String[] commands = new String[]{
-            "F:\n",
-            "cd " + compileLocation + "\n",
-            Config.COMPILE_CMD + "\n"
+        "F:\n",
+        "cd " + compileLocation + "\n",
+        Config.COMPILE_CMD + "\n"
     };
     for (String cmd : commands) {
       writer.write(cmd);
