@@ -22,8 +22,8 @@ public class HouseKeeping {
 
   private static void duplicate() throws InterruptedException {
     ExecutorService pool = new ScheduledThreadPoolExecutor(Config.SEED_NUMBER);
-//    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
-    for (int i = 0; i < Config.SEED_NUMBER; i++) {
+    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
+//    for (int i = 0; i < Config.SEED_NUMBER; i++) {
       String path = Config.BASE + File.separator + Config.ORIGIN_DIR + i;
       File file = new File(path);
       pool.submit(() -> {
@@ -68,12 +68,12 @@ public class HouseKeeping {
 
   private static void modifyConfig() throws IOException {
 
-    String firstPath = Config.BASE + File.separator + Config.ORIGIN_DIR + 0 + File.separator
+    String firstPath = Config.BASE + File.separator + Config.ORIGIN_DIR + File.separator
         + Config.CLUSTER_BASE + File.separator + Config.IOTDB_CLUSTER;
     modifyFile(Paths.get(firstPath), Config.REPLICATION_MATCHER, Config.NEW_REPLICATION_TEXT);
 
-//    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
-    for (int i = 1; i < Config.SEED_NUMBER; i++) {
+    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
+//    for (int i = 1; i < Config.SEED_NUMBER; i++) {
       String path;
       // modify cluster/iotdb-cluster.properties
       path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator
@@ -117,8 +117,8 @@ public class HouseKeeping {
 
   private static void compile() throws InterruptedException {
     ExecutorService pool = new ScheduledThreadPoolExecutor(Config.SEED_NUMBER);
-//    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
-    for (int i = 0; i < Config.SEED_NUMBER; i++) {
+    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
+//    for (int i = 0; i < Config.SEED_NUMBER; i++) {
       int finalI = i;
       pool.submit(() -> {
         try {

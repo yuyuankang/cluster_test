@@ -6,7 +6,7 @@ class Config {
   private Config() {
   }
 
-  static final String BASE = "G:\\workspace\\github\\cluster";
+  static final String BASE = "F:\\git_workspace\\cluster";
 
   static final int SEED_NUMBER = 3;
   static final int CLIENT_NUMBER = 1;
@@ -23,7 +23,7 @@ class Config {
   static final String CLUSTER_ENV = "cluster-env.bat";
 
   static final String START_CLUSTER_BAT = "cluster\\target\\cluster-0.10.0-SNAPSHOT\\sbin\\start-node.bat";
-  static final String START_CLIENT_BAT = "client\\target\\iotdb-client-0.10.0-SNAPSHOT\\sbin\\start-client.bat";
+  static final String START_CLIENT_BAT = "cli\\target\\iotdb-cli-0.10.0-SNAPSHOT\\sbin\\start-cli.bat";
 
   // The content to be modified, matcher
   static final List<String> replacedInClusterIotdbCluster
@@ -33,7 +33,7 @@ class Config {
   static final List<String> replacedInServerIotdbEngine = Arrays
       .asList("rpc_port=6667", "mqtt_port=1883");
 
-  static final String COMPILE_CMD = "mvn package -pl cluster,client -am -DskipTests";
+  static final String COMPILE_CMD = "mvn package -pl cluster -am -DskipTests";
   static final int REMOVE_TEMP_BATCH_TIME = 5000; // unit: ms
 
   static final String START_COMPILATION_MESSAGE = "Start compilation in {} ";
@@ -53,4 +53,5 @@ class Config {
   static final String REPLICATION_MATCHER = "REPLICA_NUM=3";
   static final String NEW_REPLICATION_TEXT = String
       .join("=", REPLICATION_MATCHER.split("=")[0], String.valueOf(REPLICATION_NUM));
+  static final int DATA_NUM = 3;
 }
