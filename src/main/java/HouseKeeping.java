@@ -55,6 +55,9 @@ public class HouseKeeping {
       afterSplit[1] = value.substring(1, value.length() - 2);
     }
     afterSplit[1] = String.valueOf((Integer.parseInt(afterSplit[1]) + i));
+    if(hasQuote){
+      afterSplit[1] = "\"" + afterSplit[1] + "\"";
+    }
     return String.join("=", afterSplit);
   }
 
