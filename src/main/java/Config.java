@@ -6,7 +6,7 @@ class Config {
   private Config() {
   }
 
-  static final String BASE = "F:\\git_workspace\\cluster";
+  static final String BASE = "/home/yuyuankang/Documents/workspace/github/cluster";
 
   static final int SEED_NUMBER = 3;
   static final int CLIENT_NUMBER = 1;
@@ -15,20 +15,20 @@ class Config {
 
   // The following configurations should be modified, cluster/iotdb-cluster.properties, cluster/iotdb-engine.properties, cluster/cluster-env.bat, server/iotdb-engine.properties
 
-  static final String CLUSTER_BASE = "cluster\\src\\assembly\\resources\\conf";
-  static final String SERVER_BASE = "server\\src\\assembly\\resources\\conf";
+  static final String CLUSTER_BASE = "cluster/src/assembly/resources/conf";
+  static final String SERVER_BASE = "server/src/assembly/resources/conf";
 
   static final String IOTDB_CLUSTER = "iotdb-cluster.properties";
   static final String IOTDB_ENGINE = "iotdb-engine.properties";
-  static final String CLUSTER_ENV = "cluster-env.bat";
+  static final String CLUSTER_ENV = "cluster-env.sh";
 
-  static final String START_CLUSTER_BAT = "cluster\\target\\cluster-0.10.0-SNAPSHOT\\sbin\\start-node.bat";
-  static final String START_CLIENT_BAT = "cli\\target\\iotdb-cli-0.10.0-SNAPSHOT\\sbin\\start-cli.bat";
+  static final String START_CLUSTER_BAT = "cluster/target/cluster-0.10.0-SNAPSHOT/sbin/start-node.sh";
+  static final String START_CLIENT_BAT = "cli/target/iotdb-cli-0.10.0-SNAPSHOT/sbin/start-cli.sh";
 
   // The content to be modified, matcher
   static final List<String> replacedInClusterIotdbCluster
       = Arrays.asList("LOCAL_META_PORT=9003", "LOCAL_DATA_PORT=40010", "LOCAL_CLIENT_PORT=55560");
-  static final List<String> replacedInClusterClusterEnv = Arrays.asList("set JMX_PORT=31999");
+  static final List<String> replacedInClusterClusterEnv = Arrays.asList("set JMX_PORT=\"31999\"");
   static final List<String> replacedInClusterIotdbEngine = Arrays.asList("rpc_port=6667");
   static final List<String> replacedInServerIotdbEngine = Arrays
       .asList("rpc_port=6667", "mqtt_port=1883");
@@ -41,9 +41,9 @@ class Config {
   static final String START_MODIFYING_MESSAGE = "Start modifying configuration in file {}.";
   static final String FINISH_MODIFYING_MESSAGE = "Finish modifying configuration in file {}.";
 
-  static final String DATA_DIR = "cluster\\target\\cluster-0.10.0-SNAPSHOT\\data";
+  static final String DATA_DIR = "cluster/target/cluster-0.10.0-SNAPSHOT/data";
 
-  static final String SBIN = "cluster\\target\\cluster-0.10.0-SNAPSHOT\\sbin";
+  static final String SBIN = "cluster/target/cluster-0.10.0-SNAPSHOT/sbin";
 
   static final String NODE_ID = "node_identifier";
   static final String PARTITIONS = "partitions";

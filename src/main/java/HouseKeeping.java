@@ -22,8 +22,8 @@ public class HouseKeeping {
 
   private static void duplicate() throws InterruptedException {
     ExecutorService pool = new ScheduledThreadPoolExecutor(Config.SEED_NUMBER);
-    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
-//    for (int i = 0; i < Config.SEED_NUMBER; i++) {
+//    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
+    for (int i = 0; i < Config.SEED_NUMBER; i++) {
       String path = Config.BASE + File.separator + Config.ORIGIN_DIR + i;
       File file = new File(path);
       pool.submit(() -> {
@@ -48,6 +48,12 @@ public class HouseKeeping {
 
   private static String generateNewText(int i, String text) {
     String[] afterSplit = text.split("=");
+    String value = afterSplit[1].trim();
+    boolean hasQuote = false;
+    if(value.startsWith("\"") && value.endsWith("\"")){
+      hasQuote = true;
+      afterSplit[1] = value.substring(1, value.length() - 2);
+    }
     afterSplit[1] = String.valueOf((Integer.parseInt(afterSplit[1]) + i));
     return String.join("=", afterSplit);
   }
@@ -72,8 +78,8 @@ public class HouseKeeping {
         + Config.CLUSTER_BASE + File.separator + Config.IOTDB_CLUSTER;
     modifyFile(Paths.get(firstPath), Config.REPLICATION_MATCHER, Config.NEW_REPLICATION_TEXT);
 
-    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
-//    for (int i = 1; i < Config.SEED_NUMBER; i++) {
+//    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
+    for (int i = 1; i < Config.SEED_NUMBER; i++) {
       String path;
       // modify cluster/iotdb-cluster.properties
       path = Config.BASE + File.separator + Config.ORIGIN_DIR + i + File.separator
@@ -170,6 +176,6 @@ public class HouseKeeping {
   public static void main(String args[]) throws IOException, InterruptedException {
     duplicate();
     modifyConfig();
-    compile();
+//    compile();
   }
 }
