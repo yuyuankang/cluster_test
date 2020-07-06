@@ -11,7 +11,7 @@ class ExecuteUtils {
   static void executeBatchFile(String path, Logger logger) {
     logger.info("Start executing batch file: {}.", path);
     if (new File(path).exists()) {
-      String command = "cmd /c start \"\" " + path;
+      String command = "sh " + path;
       try {
         Runtime.getRuntime().exec(command);
       } catch (IOException e) {
@@ -25,7 +25,7 @@ class ExecuteUtils {
   static void executeBatchFile(String path, Logger logger, String... args) {
     logger.info("Start executing batch file: {}.", path);
     if (new File(path).exists()) {
-      String command = "cmd /c start \"\" " + path + " " + String.join(" ", args);
+      String command = "sh "+ path + " " + String.join(" ", args);
       try {
         Runtime.getRuntime().exec(command);
       } catch (IOException e) {
