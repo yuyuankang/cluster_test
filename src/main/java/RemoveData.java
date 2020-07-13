@@ -66,8 +66,8 @@ public class RemoveData {
     }
 
     // remove files in duplications
-    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
-//    for (int i = 0; i < Config.SEED_NUMBER; i++) {
+//    for (int i = Config.SEED_NUMBER - 1; i >= Config.CLIENT_NUMBER; i--) {
+    for (int i = 0; i < Config.SEED_NUMBER; i++) {
       String path = Config.BASE + File.separator
           + Config.ORIGIN_DIR + i + File.separator + Config.DATA_DIR;
       String partitionPath = Config.BASE + File.separator

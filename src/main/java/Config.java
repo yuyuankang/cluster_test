@@ -6,7 +6,7 @@ class Config {
   private Config() {
   }
 
-  static final String BASE = "F:\\git_workspace\\cluster";
+  static final String BASE = "C:\\workspace\\github\\cluster";
 
   static final int SEED_NUMBER = 3;
   static final int CLIENT_NUMBER = 1;
@@ -23,7 +23,7 @@ class Config {
   static final String CLUSTER_ENV = "cluster-env.bat";
 
   static final String START_CLUSTER_BAT = "cluster\\target\\cluster-0.10.0-SNAPSHOT\\sbin\\start-node.bat";
-  static final String START_CLIENT_BAT = "cli\\target\\iotdb-cli-0.10.0-SNAPSHOT\\sbin\\start-cli.bat";
+  static final String START_CLIENT_BAT = "cli\\target\\iotdb-cli-0.11.0-SNAPSHOT\\sbin\\start-cli.bat";
 
   // The content to be modified, matcher
   static final List<String> replacedInClusterIotdbCluster
