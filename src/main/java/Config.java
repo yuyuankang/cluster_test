@@ -27,7 +27,7 @@ class Config {
 
   // The content to be modified, matcher
   static final List<String> replacedInClusterIotdbCluster
-      = Arrays.asList("LOCAL_META_PORT=9003", "LOCAL_DATA_PORT=40010", "LOCAL_CLIENT_PORT=55560");
+      = Arrays.asList("internal_meta_port=9003", "internal_data_port=40010", "cluster_rpc_port=55560");
   static final List<String> replacedInClusterClusterEnv = Arrays.asList("set JMX_PORT=31999");
   static final List<String> replacedInClusterIotdbEngine = Arrays.asList("rpc_port=6667");
   static final List<String> replacedInServerIotdbEngine = Arrays
